@@ -1,8 +1,11 @@
 from typing import AnyStr, List
 from scholarly import scholarly, ProxyGenerator
 from gentopia.tools.basetool import *
-from scholarly import ProxyGenerator
 from itertools import islice
+pg = ProxyGenerator()
+import pdb; pdb.set_trace()
+pg.FreeProxies()
+scholarly.use_proxy(pg)
 
 
 class SearchAuthorByNameArgs(BaseModel):
@@ -21,6 +24,9 @@ class SearchAuthorByName(BaseTool):
     results: List = []
 
     def _run(self, author: AnyStr, top_k: int = 5) -> str:
+        pg = ProxyGenerator()
+        pg.FreeProxies()
+        scholarly.use_proxy(pg)
         if author != self.author:
             self.results = scholarly.search_author(author)
         self.author = author
@@ -58,6 +64,9 @@ class SearchAuthorByInterests(BaseTool):
     results: List = []
 
     def _run(self, interests: AnyStr, top_k: int = 5) -> str:
+        pg = ProxyGenerator()
+        pg.FreeProxies()
+        scholarly.use_proxy(pg)
         if interests != self.interests:
             self.results = scholarly.search_keywords(interests.split(','))
         self.interests = interests
@@ -97,6 +106,9 @@ class AuthorUID2Paper(BaseTool):
     results: List = []
 
     def _run(self, uid: AnyStr, sort_by: AnyStr, top_k: int = 5) -> str:
+        pg = ProxyGenerator()
+        pg.FreeProxies()
+        scholarly.use_proxy(pg)
         if uid != self.uid or sort_by != self.sort_by:
             author = scholarly.search_author_id(uid)
             author = scholarly.fill(author, sortby=sort_by)
@@ -140,6 +152,9 @@ class SearchPaper(BaseTool):
     results: List = []
 
     def _run(self, title: AnyStr, sort_by: AnyStr, top_k: int = 5) -> str:
+        pg = ProxyGenerator()
+        pg.FreeProxies()
+        scholarly.use_proxy(pg)
         if title != self.title or sort_by != self.sort_by:
             self.results = scholarly.search_pubs(title, sort_by=sort_by)
         self.title = title
@@ -179,6 +194,9 @@ class SearchSinglePaper(BaseTool):
     results: List = []
 
     def _run(self, title: AnyStr, top_k: int = 1) -> str:
+        pg = ProxyGenerator()
+        pg.FreeProxies()
+        scholarly.use_proxy(pg)
         if title != self.title:
             paper = scholarly.search_single_pub(title)
         self.title = title
@@ -214,6 +232,9 @@ class SearchRelatedPaper(BaseTool):
     results: List = []
 
     def _run(self, title: AnyStr, top_k: int = 5) -> str:
+        pg = ProxyGenerator()
+        pg.FreeProxies()
+        scholarly.use_proxy(pg)
         if title != self.title:
             # please make sure the title is complete
             paper = scholarly.search_single_pub(title)
@@ -255,6 +276,7 @@ class SearchCitePaper(BaseTool):
     results: List = []
 
     def _run(self, title: AnyStr, top_k: int = 5) -> str:
+        pdb.set_trace()
         if title != self.title:
             # please make sure the title is complete
             paper = scholarly.search_single_pub(title)

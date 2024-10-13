@@ -10,7 +10,6 @@ from gentopia.output import enable_log
 def main():
     enable_log(log_level='info')
     dotenv.load_dotenv(".env")
-
     parser = argparse.ArgumentParser(description='Assemble an agent with given name.')
     parser.add_argument('name', type=str, help='Name of the agent to assemble.')
     parser.add_argument('--print_agent', action='store_true', help='Print the agent if specified.')
