@@ -51,8 +51,8 @@ class PDFReader(BaseTool):
 
         return text
     
-    def _run(self, query: AnyStr) -> str:
-        return '\n\n'.join([str(item) for item in self._get_pdf_text(query)])
+    def _run(self, title: AnyStr) -> str:
+        return self._get_pdf_text(title=title)
 
     async def _arun(self, *args: Any, **kwargs: Any) -> Any:
         raise NotImplementedError

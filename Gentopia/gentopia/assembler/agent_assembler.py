@@ -207,6 +207,7 @@ class AgentAssembler:
         """
         assert isinstance(obj, list)
         result = []
+        #import pdb; pdb.set_trace()
         for plugin in obj:
             # If referring to a tool class then directly load it
             if issubclass(plugin.__class__, ToolMetaclass):

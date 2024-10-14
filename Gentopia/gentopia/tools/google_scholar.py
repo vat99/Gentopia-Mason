@@ -3,7 +3,6 @@ from scholarly import scholarly, ProxyGenerator
 from gentopia.tools.basetool import *
 from itertools import islice
 pg = ProxyGenerator()
-import pdb; pdb.set_trace()
 pg.FreeProxies()
 scholarly.use_proxy(pg)
 
@@ -276,7 +275,6 @@ class SearchCitePaper(BaseTool):
     results: List = []
 
     def _run(self, title: AnyStr, top_k: int = 5) -> str:
-        pdb.set_trace()
         if title != self.title:
             # please make sure the title is complete
             paper = scholarly.search_single_pub(title)
